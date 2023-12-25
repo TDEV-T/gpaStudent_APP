@@ -38,7 +38,9 @@ dependencies:
 
   introduction_screen: ^3.1.12
   shared_preferences: ^2.2.2
-
+  dio: ^5.4.0
+  logger: ^2.0.2+1
+  connectivity_plus: ^5.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
