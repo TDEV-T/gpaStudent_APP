@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gpastudent/components/rounded_button.dart';
+import 'package:flutter_gpastudent/main.dart';
+import 'package:flutter_gpastudent/services/rest_api.dart';
 import 'package:flutter_gpastudent/views/login/components/TextInputField.dart';
 
 class LoginForm extends StatelessWidget {
@@ -34,7 +38,7 @@ class LoginForm extends StatelessWidget {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "กรุณากรอกรหัสประจำตัวนักศึกษา";
-                    } else if (value.length < 14) {
+                    } else if (value.length < 11) {
                       return "กรุณากรอกรหัสนักศึกษาให้ถูกต้อง";
                     }
                     return null;
@@ -64,9 +68,18 @@ class LoginForm extends StatelessWidget {
                 ),
                 RoundedButton(
                     label: "Login",
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKeyLogin.currentState!.validate()) {
                         _formKeyLogin.currentState!.save();
+
+                        var resp = await RESTAPI().loginStudent({
+                          "studentId": _studentId.text,
+                          "nationalId": _nationalId.text,
+                        });
+
+                        var body = jsonDecode(resp);
+
+                        logger.i(body);
                       }
                     })
               ],

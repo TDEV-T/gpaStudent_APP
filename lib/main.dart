@@ -1,9 +1,20 @@
 import "package:flutter/material.dart";
 import "package:flutter_gpastudent/themes/styles.dart";
 import "package:flutter_gpastudent/utils/app_router.dart";
+import "package:logger/logger.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 var initialRoute;
+
+final logger = Logger(
+  printer: PrettyPrinter(
+    methodCount: 1,
+    colors: true,
+    printEmojis: true,
+    printTime: true,
+  ),
+);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
