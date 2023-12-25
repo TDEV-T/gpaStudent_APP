@@ -46,7 +46,7 @@ class LoginForm extends StatelessWidget {
                   height: 10,
                 ),
                 TextinputField(
-                  controller: _studentId,
+                  controller: _nationalId,
                   hintText: "รหัสบัตรประชาชน",
                   validator: (value) {
                     if (value == null || value.isEmpty) {

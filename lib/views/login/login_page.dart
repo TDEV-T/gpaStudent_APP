@@ -3,7 +3,6 @@ import 'package:flutter_gpastudent/components/mobile_layout.dart';
 import 'package:flutter_gpastudent/components/responsive_layout.dart';
 import 'package:flutter_gpastudent/components/web_layout.dart';
 import 'package:flutter_gpastudent/views/login/login_form.dart';
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
