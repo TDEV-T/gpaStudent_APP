@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gpastudent/components/rounded_button.dart';
 import 'package:flutter_gpastudent/main.dart';
 import 'package:flutter_gpastudent/services/rest_api.dart';
+import 'package:flutter_gpastudent/utils/app_router.dart';
+import 'package:flutter_gpastudent/utils/utility.dart';
 import 'package:flutter_gpastudent/views/login/components/TextInputField.dart';
 
 class LoginForm extends StatelessWidget {
@@ -79,7 +81,29 @@ class LoginForm extends StatelessWidget {
 
                         var body = jsonDecode(resp);
 
-                        logger.i(body);
+                        Utility().logger.i(body);
+
+                        if (body != null) {
+                          if (body['message'] == 'Not Connection Network') {
+                            Utility.showAlertDialog(context, "แจ้งเตือน",
+                                "ไม่มีการเชื่อมต่อ Internet");
+                          } else if (body['message'] ==
+                                  "Can't find StudentID" &&
+                              body['studentId'] == null) {
+                            Utility.showAlertDialog(context, "แจ้งเตือน",
+                                "รหัสนักเรียนหรือรหัสบัตรประชาชนผิด ");
+                          } else if (body['message'] == 'Login Success') {
+                            await Utility.initSharedPrefs();
+                            Utility.setSharedPreference(
+                                "studentID", body['studentId']);
+                            Navigator.pushReplacementNamed(context, AppRouter.homepage);
+                          }
+                        } else {
+                          if (body['status'] == 'ok') {
+                            Utility.showAlertDialog(
+                                context, "แจ้งเตือน", "Error Can't find");
+                          }
+                        }
                       }
                     })
               ],

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_gpastudent/main.dart';
 import 'package:flutter_gpastudent/utils/constants.dart';
+import 'package:flutter_gpastudent/utils/utility.dart';
 import 'package:logger/logger.dart';
 
 class DioConfig {
@@ -16,22 +17,22 @@ class DioConfig {
     }, onError: (DioException e, handler) async {
       switch (e.response?.statusCode) {
         case 400:
-          logger.e("Bad Request");
+          Utility().logger.e("Bad Request");
           break;
         case 401:
-          logger.e("Unauthorized");
+          Utility().logger.e("Unauthorized");
           break;
         case 403:
-          logger.e("Forbidden");
+          Utility().logger.e("Forbidden");
           break;
         case 404:
-          logger.e("Not Found");
+          Utility().logger.e("Not Found");
           break;
         case 500:
-          logger.e("Internal Server Error");
+          Utility().logger.e("Internal Server Error");
           break;
         default:
-          logger.e("Something went wrong !");
+          Utility().logger.e("Something went wrong !");
           break;
       }
       return handler.next(e);
