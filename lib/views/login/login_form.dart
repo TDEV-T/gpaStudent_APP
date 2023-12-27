@@ -96,7 +96,8 @@ class LoginForm extends StatelessWidget {
                             await Utility.initSharedPrefs();
                             Utility.setSharedPreference(
                                 "studentID", body['studentId']);
-                            Navigator.pushReplacementNamed(context, AppRouter.homepage);
+                            Navigator.pushReplacementNamed(
+                                context, AppRouter.homepage);
                           }
                         } else {
                           if (body['status'] == 'ok') {
